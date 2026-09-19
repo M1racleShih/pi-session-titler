@@ -24,7 +24,7 @@ See [docs/design.md](docs/design.md) for the full specification, including the a
 
 ```bash
 pi install npm:pi-session-titler        # from npm (once published)
-pi install git:github.com/<you>/pi-session-titler   # from GitHub
+pi install git:github.com/M1racleShih/pi-session-titler   # from GitHub
 ```
 
 Try it once without installing:

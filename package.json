@@ -13,7 +13,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/your-name/pi-session-titler.git"
+		"url": "git+https://github.com/M1racleShih/pi-session-titler.git"
 	},
 	"pi": {
 		"extensions": ["./extensions"]
