@@ -91,7 +91,9 @@ const TRAILING_PUNCTUATION = /[.?!！。？]+$/;
  *
  * Order (design doc §3.5): first non-empty line → strip prefixes → strip
  * wrapping quotes → collapse whitespace → strip trailing punctuation →
- * empty means failure → truncate to display width.
+ * trim (punctuation removal can expose trailing whitespace) → empty means
+ * failure → truncate to display width → trim (truncation can expose trailing
+ * whitespace). Trimming only shrinks the result, so the width budget is kept.
  *
  * Returns `undefined` when nothing usable survives.
  */
@@ -127,11 +129,11 @@ export function normalizeTitle(raw: unknown, maxChars: number): string | undefin
 	}
 
 	line = line.replace(/\s+/g, " ").trim();
-	line = line.replace(TRAILING_PUNCTUATION, "");
+	line = line.replace(TRAILING_PUNCTUATION, "").trim();
 
 	if (!line) return undefined;
 
-	const truncated = truncateByWidth(line, maxChars);
+	const truncated = truncateByWidth(line, maxChars).trim();
 	return truncated.length > 0 ? truncated : undefined;
 }
 

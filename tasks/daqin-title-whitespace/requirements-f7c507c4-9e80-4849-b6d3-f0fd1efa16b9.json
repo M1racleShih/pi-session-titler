@@ -1,0 +1,50 @@
+{
+  "issue": {
+    "body": "Prepared by Daqin automation for a human-approved v0.1 real-project trial. The operator requested selection of a suitable task in an existing personal repository. Creating this Issue alone does not start an agent; the final acceptance and merge belong to the human.\n\n## Problem and outcome\n\nGenerated session titles can retain trailing whitespace after punctuation removal or display-width truncation. At source baseline 23e1d655112e56d93ab537e2b6998934a954a091, normalizeTitle(\"Fix login bug\", 4) and normalizeTitle(\"Fix .\", 36) both return \"Fix \". The resulting saved display name has an invisible trailing space.\n\nReturn a nonempty title without leading/trailing whitespace while preserving the existing display-width limit and normalization behavior.\n\n## Scope\n\nModify only src/title.ts, tests/title.test.ts, README.md if necessary, and tasks/daqin-title-whitespace/handoff.md. The controller saves immutable requirements/check records in that task package. Use one noninteractive Pi in a dedicated clone, one codex/ task branch, the existing MiMo v2.6 Pro Coding Plan with medium thinking, and the existing project dependencies.\n\nDo not change package dependencies, extension wiring, provider behavior, model selection, CI, release settings or global Pi configuration. Do not install the extension, invoke title-generation model calls, publish a package, merge or deploy. No additional agents or credentials.\n\n## Acceptance\n\n- normalizeTitle(\"Fix login bug\", 4) returns \"Fix\".\n- normalizeTitle(\"Fix .\", 36) returns \"Fix\".\n- normalizeTitle(\"修复 登录\", 5) returns \"修复\".\n- Existing normalization, internal whitespace and punctuation behavior remains intact; unusable output still returns undefined.\n- Regression tests cover whitespace exposed by punctuation removal and truncation, including a CJK display-width boundary. Returned title width must remain within the supplied budget.\n- npm test, npm run typecheck and git diff --check pass with actual controller-run results.\n- Deliver the accepted Issue snapshot, baseline, check evidence and handoff with the source commit in a Draft PR to main. Human acceptance and merge are still required.\n\n## Baseline and limits\n\nSource and integration baseline: 23e1d655112e56d93ab537e2b6998934a954a091. Node.js 24.18.0, Pi 1.0.0. Baseline: 52 tests and TypeScript checking passed; both ASCII failures were independently reproduced. The existing dependency audit reports five vulnerabilities (three moderate, two high); dependency changes are excluded from this task. No numerical task duration or cost limit was set; this does not authorize automatic infinite retries or extra agents.\n",
+    "number": 1,
+    "state": "OPEN",
+    "title": "Trim generated titles after punctuation removal and width truncation",
+    "updatedAt": "2026-10-02T16:54:06Z",
+    "url": "https://github.com/M1racleShih/pi-session-titler/issues/1"
+  },
+  "issueBodySha256": "8881313fc4c156cedff58148b0fb7cacc00fcb4c967f64e6ed984d3a6208c323",
+  "branch": "codex/issue-1-trim-generated-titles",
+  "startingCommit": "23e1d655112e56d93ab537e2b6998934a954a091",
+  "previousCommit": "23e1d655112e56d93ab537e2b6998934a954a091",
+  "integrationBaseline": "23e1d655112e56d93ab537e2b6998934a954a091",
+  "allowedPaths": [
+    "src/title.ts",
+    "tests/title.test.ts",
+    "README.md",
+    "tasks/daqin-title-whitespace/handoff.md"
+  ],
+  "checks": [
+    {
+      "file": "npm",
+      "args": [
+        "test"
+      ]
+    },
+    {
+      "file": "npm",
+      "args": [
+        "run",
+        "typecheck"
+      ]
+    },
+    {
+      "file": "git",
+      "args": [
+        "diff",
+        "--check"
+      ]
+    }
+  ],
+  "pi": {
+    "provider": "xiaomi-token-plan-cn",
+    "model": "mimo-v2.6-pro",
+    "thinking": "medium"
+  },
+  "run": "f7c507c4-9e80-4849-b6d3-f0fd1efa16b9",
+  "approvedBy": "explicit local operator action"
+}

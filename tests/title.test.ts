@@ -95,6 +95,39 @@ describe("normalizeTitle", () => {
 		expect(normalizeTitle("Fix login?!", 36)).toBe("Fix login");
 	});
 
+	it("trims trailing whitespace exposed by punctuation removal", () => {
+		expect(normalizeTitle("Fix .", 36)).toBe("Fix");
+		expect(normalizeTitle("修复 。", 36)).toBe("修复");
+		expect(normalizeTitle("Fix   .", 36)).toBe("Fix");
+	});
+
+	it("trims trailing whitespace exposed by width truncation", () => {
+		expect(normalizeTitle("Fix login bug", 4)).toBe("Fix");
+		expect(normalizeTitle("Fix login bug.", 4)).toBe("Fix");
+	});
+
+	it("trims whitespace at a CJK display-width boundary within budget", () => {
+		// width 5 boundary falls on the space after 修复 (width 4)
+		const title = normalizeTitle("修复 登录", 5);
+		expect(title).toBe("修复");
+		expect(displayWidth(title!)).toBeLessThanOrEqual(5);
+	});
+
+	it("returns trimmed, nonempty titles within the width budget", () => {
+		for (const [raw, budget] of [
+			["Fix login bug", 4],
+			["Fix .", 36],
+			["修复 登录", 5],
+			["修复 登录。", 5],
+		] as const) {
+			const title = normalizeTitle(raw, budget);
+			expect(title).toBeDefined();
+			expect(title).toBe(title!.trim());
+			expect(title!.length).toBeGreaterThan(0);
+			expect(displayWidth(title!)).toBeLessThanOrEqual(budget);
+		}
+	});
+
 	it("keeps internal punctuation", () => {
 		expect(normalizeTitle("Fix PROJ-1234 crash", 36)).toBe("Fix PROJ-1234 crash");
 	});
