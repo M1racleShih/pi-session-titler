@@ -1,0 +1,72 @@
+{
+  "run": "f7c507c4-9e80-4849-b6d3-f0fd1efa16b9",
+  "pi": {
+    "exitCode": 0,
+    "signal": null,
+    "settled": true,
+    "cancelled": false,
+    "protocolErrors": 0,
+    "assistantErrors": 0,
+    "events": {
+      "session": 1,
+      "agent_start": 1,
+      "turn_start": 13,
+      "message_start": 33,
+      "message_end": 33,
+      "message_update": 1634,
+      "tool_execution_start": 18,
+      "tool_execution_update": 36,
+      "tool_execution_end": 18,
+      "turn_end": 13,
+      "agent_end": 1,
+      "agent_settled": 1
+    },
+    "tools": {
+      "bash": 14,
+      "read": 1,
+      "edit": 2,
+      "write": 1
+    }
+  },
+  "checks": [
+    {
+      "file": "npm",
+      "args": [
+        "test"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "cancelled": false,
+      "passed": true
+    },
+    {
+      "file": "npm",
+      "args": [
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "cancelled": false,
+      "passed": true
+    },
+    {
+      "file": "git",
+      "args": [
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "cancelled": false,
+      "passed": true
+    }
+  ],
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "linux"
+  },
+  "integrationBaseline": "23e1d655112e56d93ab537e2b6998934a954a091",
+  "acceptance": "pending human review",
+  "rawSessionSaved": false
+}
